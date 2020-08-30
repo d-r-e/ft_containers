@@ -2,7 +2,7 @@ NAME = ft_containers
 
 SRC = main.cpp
 
-INC = base.hpp
+INC = list.hpp
 
 $(NAME): $(SRC) $(INC)
 	clang++ main.cpp -o $(NAME)

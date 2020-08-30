@@ -18,6 +18,9 @@ namespace ft
 			if (this == &rhs)
 				return (*this);
 			this->_size = rhs.size();
+			this->_elem = new T[_size];
+			for (int i = 0; i < _size; ++i)
+				this->_elem[i] = rhs._elem[i];
 			this->_elem = rhs._elem;
 			return *this;
 		}

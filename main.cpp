@@ -1,6 +1,6 @@
 #include <list>
 #include <iterator>
-#include "base.hpp"
+#include "list.hpp"
 
 int main()
 {
@@ -25,5 +25,6 @@ int main()
 		std::cout << d.size() << " " << d.max_size() << std::endl;
 		ft::list<int> jota = d;
 		jota = d;
+		ft::list<int> ka(jota);
 	}
 }
