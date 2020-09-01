@@ -44,8 +44,6 @@ namespace ft
 		Node<T>*		_tail;
 		Node<T>*		_start;
 		Node<T>*		_end;
-		
-		size_t _max_size = 768614336404564650UL;
 
 	public:
 		explicit list (const allocator_type& alloc = allocator_type())
