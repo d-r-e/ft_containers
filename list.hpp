@@ -1,59 +1,73 @@
-#include <iostream>
-#include <string>
-
+#ifndef LIST_HPP
+# define LIST_HPP
+# include <iostream>
+# include <string>
+# include <memory>
+# include <limits>
 namespace ft
 {
 	template<typename T>
+	struct Node
+	{
+		T		data;
+		Node<T>	*next;
+		Node<T>	*prev;
+
+		Node<T>(): data(), next(NULL), prev(NULL) {}
+		Node<T>(T data): data(data), next(NULL), prev(NULL) {}
+		Node<T>(const Node<T> &rhs): data(rhs.data), next(rhs.next), prev(rhs.prev) {}
+		Node<T> & operator=(const Node<T> &rhs) { *this = rhs; }
+		~Node<T>() {}
+	};
+
+	template < class T, class Alloc = std::allocator<T> > 
 	class list
 	{
-	private:
-		size_t _size;
-		size_t _max_size = 768614336404564650;
-		T	*_elem;
 	public:
-		list(): _size(0), _elem(new T[0]) {}
-		list(unsigned int n): _size(n), _elem(new T[n]) {}
-		list(const list<T> &rhs) { *this = rhs; }
-		list<T> & operator=(const list<T> &rhs){
-			if (this == &rhs)
-				return (*this);
-			this->_size = rhs.size();
-			this->_elem = new T[_size];
-			for (int i = 0; i < _size; ++i)
-				this->_elem[i] = rhs._elem[i];
-			this->_elem = rhs._elem;
-			return *this;
-		}
-		~list() { delete [] this->_elem; }
+		typedef size_t	size_type;
+		typedef Alloc	allocator_type;
+		typedef T		value_type;
+		typedef T		&reference;
+		typedef T		*pointer;
+		typedef const T	&const_reference;
+		typedef const T *const_pointer;
+		/*
+		typedef ft::IteratorList<T>								iterator;
+		typedef ft::ConstIteratorList<T>						const_iterator;
+		typedef ft::ReverseIteratorList<T>						reverse_iterator;
+		typedef ft::ConstReverseIteratorList<T>					const_reverse_iterator;
+		*/
+	private:
+		size_type		_size;
+		allocator_type	_alloc;
+		Node<T>*		_head;
+		Node<T>*		_tail;
+		Node<T>*		_start;
+		Node<T>*		_end;
+		
+		size_t _max_size = 768614336404564650UL;
 
-		bool	empty(void) const { return (this->_size > 0); }
-		size_t	size(void) const { return (this->_size); }
-		size_t	max_size(void) const { return this->_max_size; }
-
-		void push_back(const T& val){
-			if (_size == _max_size)
-				throw std::exception();
-			T *tmp = new T[_size + 1];
-			for (int i = 0; i < _size; ++i)
-				tmp[i] = _elem[i];
-			tmp[_size] = val;
-			_size++;
-			delete [] _elem;
-			_elem = tmp;
+	public:
+		explicit list (const allocator_type& alloc = allocator_type())
+		{
+			this->_alloc = alloc;
+			this->_size = 0;
+			this->_start = new Node<T>();
+			this->_end = new Node<T>();
+			_start->prev = NULL;
+			_end->next = NULL;
+			_head = _start;
+			_tail = _end;
 		}
-
-		void push_front(const T& val){
-			if (_size == _max_size)
-				throw std::exception();
-			T *tmp = new T[_size + 1];
-			tmp[0] = val;
-			for (int i = 1; i < _size + 1; ++i)
-				tmp[i] = _elem[i];
-			tmp[_size] = val;
-			_size++;
-			delete [] _elem;
-			_elem = tmp;
-		}
+	/*	explicit list (size_type n, const value_type& val = value_type(),
+                const allocator_type& alloc = allocator_type());
+		template <class InputIterator>
+ 		list (InputIterator first, InputIterator last,
+        		const allocator_type& alloc = allocator_type());	
+		list (const list& x);
+		*/
 	};
 
 };
+
+#endif
