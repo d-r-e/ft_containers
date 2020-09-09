@@ -11,4 +11,5 @@ int main()
 	std::cout << c.data << std::endl;
 
 	ft::list<int> l;
+	ft::list<int> m(5, 3);
 }
