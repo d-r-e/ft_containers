@@ -99,14 +99,14 @@ namespace ft
 
 			if (this->length == 0 && position != end())
 			{
-				cur_node = nullptr;
-				left_node = nullptr;
+				cur_node = NULL;
+				left_node = NULL;
 			}
 			else
 			{
 				cur_node = position.getPtr();
-				if (cur_node == nullptr || begin().getPtr() == nullptr)
-					left_node = nullptr;
+				if (cur_node == NULL || begin().getPtr() == NULL)
+					left_node = NULL;
 				else
 					left_node = position.getPtr()->prev;
 			}
@@ -116,7 +116,7 @@ namespace ft
 				Node<T> *new_node = new Node<T>();
 				
 				new_node->prev = left_node;
-				new_node->next = nullptr;
+				new_node->next = NULL;
 				new_node->data = val;
 
 				if (left_node)

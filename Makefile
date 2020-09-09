@@ -2,12 +2,14 @@ NAME = ft_containers
 
 SRC = main.cpp
 
-INC = list.hpp iterator.hpp node.hpp IteratorList.hpp
+INC = list.hpp iterator.hpp node.hpp IteratorList.hpp 
+
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
 $(NAME): $(SRC) $(INC)
-	clang++ main.cpp -o $(NAME)
+	clang++ $(FLAGS) main.cpp -o $(NAME)
 
-exe: $(NAME)
+x: fclean $(NAME)
 	./$(NAME)
 
 clean:
@@ -16,6 +18,6 @@ fclean: clean
 	rm -f $(NAME)
 
 push: fclean
-	git add Makefile $(SRC) $(INC)
+	git add Makefile $(SRC) $(INC) .gitignore
 	git commit -m "ft_containers"
 	git push origin master

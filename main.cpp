@@ -5,11 +5,8 @@
 
 int main()
 {
-	ft::Node<int> a(6);
 	ft::Node<int> b;
-	ft::Node<int> c = a;
-	std::cout << c.data << std::endl;
+	std::cout << &b.data << std::endl;
 
 	ft::list<int> l;
-	ft::list<int> m(5, 3);
 }

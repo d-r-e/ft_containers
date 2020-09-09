@@ -47,10 +47,10 @@ namespace ft
 				this->ptr = this->ptr->next;
 			return (*this);
 		}
-		IteratorList	operator++(int n)
+		IteratorList	operator++(int)
 		{
 			IteratorList tmp(*this);
-			this->operator++;
+			this->ptr = this->ptr->next;
 			return tmp;
 		}
 		IteratorList&	operator--(void)
@@ -59,10 +59,10 @@ namespace ft
 				this->ptr = this->ptr->prev;
 			return (*this);
 		}
-		IteratorList	operator--(int n)
+		IteratorList	operator--(int)
 		{
 			IteratorList tmp(*this);
-			this->operator--;
+			this->ptr = this->ptr->prev;
 			return tmp;
 		}
 		bool			operator==(IteratorList const &rhs) const
